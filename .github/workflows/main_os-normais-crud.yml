@@ -72,5 +72,6 @@ jobs:
         with:
           app-name: 'os-normais-crud'
           slot-name: 'Production'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          package: './release.zip'  # Apontando diretamente para o artefato compactado gerado
+
           
