@@ -4,7 +4,7 @@ const config = {
     server: process.env.AZURE_SQL_SERVER,
     database: process.env.AZURE_SQL_DATABASE,
     options: {
-        encrypt: true // Use criptografia para Azure SQL Database
+        encrypt: true
     }
 };
 

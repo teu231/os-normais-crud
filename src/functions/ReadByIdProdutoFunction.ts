@@ -6,7 +6,7 @@ import config from '../config';
 export async function ReadByIdProdutoFunction(request: HttpRequest, context: InvocationContext): Promise<HttpResponseInit> {
     context.log(`HTTP function processed request for url "${request.url}"`);
 
-    const id = parseInt(request.params.id, 10); // Captura o ID da rota
+    const id = parseInt(request.params.id, 10);
 
     if (isNaN(id)) {
         return {
@@ -51,7 +51,7 @@ export async function ReadByIdProdutoFunction(request: HttpRequest, context: Inv
 
 app.http('ReadByIdProdutoFunction', {
     methods: ['GET'],
-    route: 'produtos/{id}', // Use a rota para capturar o ID
+    route: 'produtos/{id}',
     authLevel: 'anonymous',
     handler: ReadByIdProdutoFunction
 });

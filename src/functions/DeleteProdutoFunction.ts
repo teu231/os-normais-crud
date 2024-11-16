@@ -41,7 +41,7 @@ export async function DeleteProdutoFunction(request: HttpRequest, context: Invoc
 
 app.http('DeleteProdutoFunction', {
     methods: ['DELETE'],
-    route: 'produtos/{id}', // Rota simplificada para capturar o ID
+    route: 'produtos/{id}',
     authLevel: 'anonymous',
     handler: DeleteProdutoFunction
 });

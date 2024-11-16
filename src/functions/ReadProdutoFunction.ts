@@ -7,18 +7,14 @@ export async function ReadProdutoFunction(request: HttpRequest, context: Invocat
     context.log(`Http function processed request for url "${request.url}"`);
 
     try {
-        // Conectar ao banco de dados
         let pool = await sql.connect(config);
         context.log("Database Connected Successfully");
 
-        // Executar consulta
         let result = await pool.request()
             .query('SELECT Id, Nome FROM Produto');
 
-        // Fechar a conexão
         pool.close();
 
-        // Retornar os resultados
          return { status: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(result.recordset) };
     } catch (err) {
         context.log("Erro ao conectar ao banco de dados:", err);
