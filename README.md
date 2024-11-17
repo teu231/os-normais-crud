@@ -4,6 +4,9 @@ Bem-vindo à API de Produtos! Esta API permite gerenciar produtos por meio de op
 
 ---
 
+## Postman Template
+O arquivo CRUD-Ada-Teste.postman_collection.json é um template para testar a API no Postman, basta importar no aplicativo.
+
 ## Endpoints
 
 ### 1. **Listar todos os produtos**
