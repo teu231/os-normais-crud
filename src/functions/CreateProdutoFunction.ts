@@ -13,15 +13,20 @@ export async function CreateProdutoFunction(request: HttpRequest, context: Invoc
         let pool = await sql.connect(config);
         context.log("Database Connected Successfully");
 
-        await pool.request()
+        const result = await pool.request()
             .input('Nome', sql.NVarChar, Nome)
-            .query('INSERT INTO Produto (Nome) VALUES (@Nome)');
+            .query('INSERT INTO Produto (Nome) OUTPUT inserted.ID VALUES (@Nome)');
 
         pool.close();
 
+        const novoIdDoProduto = result.recordset[0].ID;
+
         return {
             status: 201,
-            body: 'Produto criado com sucesso'
+            body: JSON.stringify({
+                message: 'Produto criado com sucesso',
+                id: novoIdDoProduto
+            })
         };
     } catch (err) {
         context.log("Erro ao conectar ao banco de dados:", err);
