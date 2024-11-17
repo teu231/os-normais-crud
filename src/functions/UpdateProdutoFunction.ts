@@ -35,15 +35,13 @@ export async function UpdateProdutoFunction(request: HttpRequest, context: Invoc
         let pool = await sql.connect(config);
         context.log("Database Connected Successfully");
 
-        // Atualizar o produto no banco de dados
         const result = await pool.request()
-            .input('Id', sql.Int, Number(id)) // Usar o ID da URL
+            .input('Id', sql.Int, Number(id))
             .input('Nome', sql.NVarChar, Nome)
             .query('UPDATE Produto SET Nome = @Nome WHERE Id = @Id');
 
         pool.close();
 
-        // Verificar se o produto foi atualizado
         if (result.rowsAffected[0] === 0) {
             return {
                 status: 404,
@@ -53,7 +51,10 @@ export async function UpdateProdutoFunction(request: HttpRequest, context: Invoc
 
         return {
             status: 200,
-            body: 'Produto atualizado com sucesso'
+            body: JSON.stringify({
+                message: 'Produto atualizado com sucesso',
+                id: id
+            })
         };
     } catch (err) {
         context.log("Erro ao conectar ao banco de dados:", err);
